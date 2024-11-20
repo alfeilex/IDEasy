@@ -1,0 +1,7 @@
+{
+  "bundles": [
+    {
+      "pattern": "nls/.*"
+    }
+  ]
+}
