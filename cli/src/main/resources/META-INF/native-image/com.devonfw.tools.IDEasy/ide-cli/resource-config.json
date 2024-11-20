@@ -1,7 +1,7 @@
 {
   "bundles": [
     {"name": "nls/Help.properties"},
-    {"name": "nls/Help_de.properties"},
+    {"name": "nls/Help_de.properties"}
   ],
   "resources": {
     "includes": [
