@@ -1,7 +1,7 @@
 {
-  "resources": [
-    {
-      "glob": "nls/.*"
-    }
-  ]
+  "resources": {
+    "includes": [
+      {"pattern": "nls/.*"}
+    ]
+  }
 }
