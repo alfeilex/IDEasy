@@ -32,35 +32,3 @@ jobs:
         with:
           name: natives-${{ matrix.os }}
           path: cli/target/*.tar.gz
-
-  # Downloads all native image artifacts to cli/target and builds the project for deployment to OSSRH Nexus
-  deploy:
-    name: Build Project and Deploy
-    needs: [ build-natives ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-      - name: Download natives and build project
-        uses: actions/download-artifact@v4
-        with:
-          pattern: natives-*
-          path: ./cli/target/
-          merge-multiple: true
-      - name: Configure Maven to use GitHub Packages
-        run: |
-          mkdir -p ~/.m2
-          ls
-          cp .mvn/settings.xml ~/.m2/settings.xml  
-      - run: |
-          mvn -B -ntp -Dstyle.color=always install
-      - name: Deploy to GitHub Package
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn --settings .mvn/settings.xml -DskipTests=true -Darchetype.test.skip=true -Dmaven.install.skip=true -Dgpg.skip=true -Dstyle.color=always -B -ntp deploy
