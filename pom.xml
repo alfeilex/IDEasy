@@ -16,6 +16,13 @@
   <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/${{ github.repository_owner }}/my-repo</url>
+    </repository>
+  </distributionManagement>
+  
   <properties>
     <github.repository>IDEasy</github.repository>
     <ide_version>${revision}</ide_version>
