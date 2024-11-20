@@ -1,6 +1,6 @@
 name: Test exec
 on:
-  workflow_dispatch
+  push
 
 jobs:
   # Downloads documentation docs artifact, builds all native images, archives native image for each os with documentation pdf file and uploads artifacts to f.e. natives-windows-latest
