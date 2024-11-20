@@ -21,11 +21,6 @@ jobs:
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
-      - name: Download documentation
-        uses: actions/download-artifact@v4
-        with:
-          name: docs
-          path: ./cli/target/package
       - name: Build native image
         shell: bash
         run: |
