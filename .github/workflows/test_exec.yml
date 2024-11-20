@@ -55,7 +55,8 @@ jobs:
       - name: Configure Maven to use GitHub Packages
         run: |
           mkdir -p ~/.m2
-          cp .github/maven/settings.xml ~/.m2/settings.xml  
+          ls
+          cp .mvn/settings.xml ~/.m2/settings.xml  
       - run: |
           mvn -B -ntp -Dstyle.color=always install
       - name: Deploy to GitHub Package
