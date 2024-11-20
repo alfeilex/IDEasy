@@ -2,10 +2,5 @@
   "bundles": [
     {"name": "nls/Help.properties"},
     {"name": "nls/Help_de.properties"}
-  ],
-  "resources": {
-    "includes": [
-      {"pattern": ".*\\.properties"}
-    ]
-  }
+  ]
 }
