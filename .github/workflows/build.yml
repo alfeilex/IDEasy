@@ -18,11 +18,9 @@ jobs:
           java-version: '17'
       - name: Build project with Maven
         run: |
-          mvn -B -ntp -Dstyle.color=always install
-          ls
-          bash cli/src/test/resources/process-context/log-order.sh
-          which bash
-          where bash
-          echo $PATH
+           compgen -c | grep sleep
+           echo $0
+           echo $SHELL
+ 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v2.2.3
