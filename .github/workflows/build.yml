@@ -18,6 +18,7 @@ jobs:
           java-version: '17'
       - name: Build project with Maven
         run: |
+           echo $PATH
            mvn -B -ntp -Dstyle.color=always install
            compgen -c | grep sleep
            echo $0
