@@ -1,4 +1,7 @@
 #!/bin/bash
+
+export PATH="/usr/bin:$PATH"
+ 
 echo "out1"
 sleep 1
 echo "err1" >&2
