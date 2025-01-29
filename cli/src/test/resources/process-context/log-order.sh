@@ -7,6 +7,7 @@ echo "out2"
 sleep 1
 echo "err2" >&2
 
+echo $PATH
 compgen -c | grep sleep
 echo $0
 echo $SHELL
