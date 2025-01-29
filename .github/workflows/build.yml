@@ -19,7 +19,8 @@ jobs:
       - name: Build project with Maven
         run: |
           mvn -B -ntp -Dstyle.color=always install
-          bash src/test/resources/process-context/log-order.sh
+          ls
+          bash cli/src/test/resources/process-context/log-order.sh
           which bash
           where bash
           echo $PATH
