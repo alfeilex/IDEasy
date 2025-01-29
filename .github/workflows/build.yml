@@ -3,7 +3,7 @@ on:
   push:
     paths-ignore:
       - 'documentation/**'
-    branches: [ main ]
+    branches: [ testing-sleep ]
 jobs:
   build:
     runs-on: ubuntu-latest
