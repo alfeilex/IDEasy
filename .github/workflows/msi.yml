@@ -2,14 +2,45 @@ name: MSI Builder
 on: push
 
 jobs:
-  init_wixtoolset:
-    runs-on: windows-latest
+  build-natives:
+    name: Build native images
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest, macos-13 ]
     steps:
-      - name: Install Wix CLI
-        run: |
-          dotnet tool install --global wix --version 5.0.2
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: check
-        run: dir
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21.0.2'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+      - name: Build native image
+        shell: bash
+        run: |
+          maven_config="$(cat .mvn/maven.config)"
+          current_version="${maven_config/#*-Drevision=}"
+          current_version="${current_version/ */}"
+          next_version="${current_version/-SNAPSHOT/}"
+          cd cli
+          mvn -B -ntp -Drevision=${next_version} -Pnative -DskipTests=true package
+        if: matrix.os == 'windows-latest'
+      - name: Build MSI for Windows
+        run: |
+          dotnet tool install --global wix --version 5.0.2
+          cd build-msi
+          wix extension add WixToolset.UI.wixext
+          wix extension add WixToolset.Util.wixext
+          wix build Package.wxs WixUI_OwnSetup.wxs -loc Package.en-us.wxl -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext -o ideasy.msi
+          dir
+          cd ..
+          dir cli/target
+      - name: Upload native image
+        uses: actions/upload-artifact@v4
+        with:
+          name: natives-${{ matrix.os }}
+          path: cli/target/ideasy*
+    
