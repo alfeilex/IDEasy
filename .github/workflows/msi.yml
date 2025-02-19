@@ -32,8 +32,8 @@ jobs:
         run: |
           dotnet tool install --global wix --version 5.0.2
           cd build-msi
-          wix extension add WixToolset.UI.wixext
-          wix extension add WixToolset.Util.wixext
+          wix extension add WixToolset.UI.wixext --version 5.0.2
+          wix extension add WixToolset.Util.wixext --version 5.0.2
           wix build Package.wxs WixUI_OwnSetup.wxs -loc Package.en-us.wxl -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext -o ideasy.msi
           dir
           cd ..
