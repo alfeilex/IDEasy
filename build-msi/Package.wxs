@@ -9,7 +9,7 @@
 
 		<Feature Id="main">
 			<!-- Include files that has to be installed -->
-			<Files Include="msi-setup\**" />
+			<Files Include="cli\target\package\**" />
 		</Feature>
 
 		<!-- Embedd .cab file with setup folder inside -->
