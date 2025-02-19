@@ -7,4 +7,9 @@ jobs:
     steps:
       - name: Install Wix CLI
         run: |
-          dotnet tool install --global wix --version 5.0.1
+          dotnet tool install --global wix --version 5.0.2
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: check
+        run: dir
