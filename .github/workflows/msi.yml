@@ -7,4 +7,4 @@ jobs:
     steps:
       - name: Install Wix CLI
         run: |
-          dotnet tool install --global wix
+          dotnet tool install --global wix --version 5.0.1
