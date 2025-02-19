@@ -18,16 +18,24 @@ jobs:
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+      - name: Build native image
+        shell: bash
+        run: |
+          maven_config="$(cat .mvn/maven.config)"
+          current_version="${maven_config/#*-Drevision=}"
+          current_version="${current_version/ */}"
+          next_version="${current_version/-SNAPSHOT/}"
+          cd cli
+          mvn -B -ntp -Drevision=${next_version} -Pnative -DskipTests=true package
       - name: Build MSI for Windows
         run: |
+          copy cli/target/ideasy.exe cli/target/package
           dotnet tool install --global wix --version 5.0.2
           cd build-msi
           wix extension add WixToolset.UI.wixext/5.0.2
           wix extension add WixToolset.Util.wixext/5.0.2
           wix build Package.wxs WixUI_OwnSetup.wxs -loc Package.en-us.wxl -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext -o ideasy.msi
-          dir
-          cd ..
-          dir cli/target
+          dir cli/target/package
         if: runner.os == 'Windows'
       - name: Upload native image
         uses: actions/upload-artifact@v4
