@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-latest, ubuntu-latest, macos-latest, macos-13 ]
+        os: [ windows-latest ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -42,6 +42,7 @@ jobs:
           current_version="${maven_config/#*-Drevision=}"
           current_version="${current_version/ */}"
           current_version="${current_version/-SNAPSHOT/-$(date +%m_%d_%H)-SNAPSHOT}"
+          msi_name="ideasy-${current-version}-windows-x64"
           cd documentation
           mvn -B -ntp clean install
           cd ..
@@ -53,12 +54,13 @@ jobs:
           wix extension add WixToolset.UI.wixext/5.0.2
           wix extension add WixToolset.Util.wixext/5.0.2
           wix build Package.wxs WixUI_IDEasySetup.wxs -loc Package.en-us.wxl -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext -o ideasy-${current-version}-windows-x64.msi
+          
       - name: Upload MSI
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: ideasy-${{ matrix.os }}
-          path: windows-installer/ideasy.msi
+          name: ${{ steps.build-msi-with-wixtoolset.outputs.msi_name }}
+          path: windows-installer/*.msi
 
   # Downloads all native image artifacts to cli/target and builds the project using assemblies for final deployment to OSSRH Nexus
   deploy:
@@ -77,7 +79,7 @@ jobs:
       - name: Download natives and build project
         uses: actions/download-artifact@v4
         with:
-          pattern: natives-*
+          pattern: natives-*,*.msi
           path: ./cli/target/
       - name: Deploy to OSSRH nexus
         env:
