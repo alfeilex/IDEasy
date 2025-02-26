@@ -275,7 +275,7 @@
                 </goals>
                 <configuration>
                   <tasks>
-                    <move file="${project.basedir}/target/ideasy.msi"
+                    <move file="${project.basedir}/target/msi/ideasy.msi"
                       tofile="${project.basedir}/target/ideasy-${project.version}.msi"/>
                   </tasks>
                 </configuration>
