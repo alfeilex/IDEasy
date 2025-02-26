@@ -223,7 +223,7 @@
                 <configuration>
                   <artifacts>
                     <artifact>
-                      <file>${project.basedir}/ideasy-${revision}-windows-x64.msi</file>
+                      <file>${project.basedir}/ideasy.msi</file>
                       <type>msi</type>
                       <classifier>installer</classifier>
                     </artifact>
