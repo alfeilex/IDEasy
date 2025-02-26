@@ -226,6 +226,7 @@
                       <file>${project.basedir}/ideasy.msi</file>
                       <type>msi</type>
                       <classifier>installer</classifier>
+                      <finalName>${project.artifactId}-${revision}</finalName>
                     </artifact>
                   </artifacts>
                 </configuration>
