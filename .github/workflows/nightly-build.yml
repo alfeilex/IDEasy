@@ -76,8 +76,6 @@ jobs:
           path: ./cli/target/
       - name: Display structure of downloaded files
         run: ls -R ./cli/target/
-      - name: Unzip ideasy.msi
-        run: unzip ./cli/target/ideasy.msi.zip
       - name: Deploy to OSSRH nexus
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
