@@ -75,6 +75,8 @@ jobs:
         with:
           pattern: natives-*,*.msi
           path: ./cli/target/
+      - name: Unzip ideasy.msi
+        run: unzip ./cli/target/ideasy.msi.zip
       - name: Deploy to OSSRH nexus
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
