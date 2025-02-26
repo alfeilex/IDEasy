@@ -73,7 +73,7 @@ jobs:
       - name: Download natives and build project
         uses: actions/download-artifact@v4
         with:
-          pattern: natives-*,*.msi
+          pattern: natives-*,*.zip
           path: ./cli/target/
       - name: Unzip ideasy.msi
         run: unzip ./cli/target/ideasy.msi.zip
