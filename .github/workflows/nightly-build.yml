@@ -35,6 +35,7 @@ jobs:
           name: natives-${{ matrix.os }}
           path: cli/target/ideasy*
       - name: Build MSI with WixToolSet
+        id: build-msi-with-wixtoolset 
         if: runner.os == 'Windows'
         shell: bash
         run: |
@@ -54,7 +55,7 @@ jobs:
           wix extension add WixToolset.UI.wixext/5.0.2
           wix extension add WixToolset.Util.wixext/5.0.2
           wix build Package.wxs WixUI_IDEasySetup.wxs -loc Package.en-us.wxl -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext -o ideasy-${current-version}-windows-x64.msi
-          
+          echo "msi_name=${msi_name}" >> $GITHUB_ENV
       - name: Upload MSI
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
