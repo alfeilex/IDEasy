@@ -43,6 +43,8 @@ jobs:
           cd ..
           mkdir -p windows-installer/msi-files
           cp documentation/target/generated-docs/IDEasy.pdf windows-installer/msi-files
+          rm -dr cli/target/package/system/mac
+          rm -dr cli/target/package/system/linux
           cp -r cli/target/package/* windows-installer/msi-files
           cp cli/target/ideasy.exe windows-installer/msi-files/bin
           cd windows-installer
