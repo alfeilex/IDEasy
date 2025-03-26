@@ -5,6 +5,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: action/checkout@v3
+        with:
+          submodules: recursive
       - name: test null bytes
         run: |
           if [ "$(git status -z)" = "" ]
