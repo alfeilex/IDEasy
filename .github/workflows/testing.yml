@@ -15,7 +15,7 @@ jobs:
         run: |
           cd ide-urls
           touch test.txt
-          if [ git status -z | grep -q . ]
+          if git status -z | grep -q .
           then
             git add .
             git commit -m "Update urls"
