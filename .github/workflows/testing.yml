@@ -14,10 +14,9 @@ jobs:
       - name: test null bytes
         run: |
           cd ide-urls
-          touch test.txt
           if git status -z | grep -q .
           then
-            echo "No changes, nothing to commit."
-          else
             echo "yes"
+          else
+            echo "No changes, nothing to commit."
           fi
