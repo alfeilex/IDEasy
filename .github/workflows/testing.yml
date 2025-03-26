@@ -15,11 +15,11 @@ jobs:
         run: |
           cd ide-urls
           touch test.txt
-          if [ "$(git status -z)" = "" ]
+          if [ git status -z | grep -q . ]
           then
-            echo "No changes, nothing to commit."
-          else
             git add .
             git commit -m "Update urls"
             git push
+          else
+            echo "No changes, nothing to commit."
           fi
