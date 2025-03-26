@@ -8,9 +8,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
-          submodules: recursive
+          repository: alfeilex/ide-urls
+          path: ide-urls
+          token: ${{ secrets.ACTION_PUSH_TOKEN }}
       - name: test null bytes
         run: |
+          cd ide-urls
           if [ "$(git status -z)" = "" ]
           then
             echo "No changes, nothing to commit."
