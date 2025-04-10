@@ -1,6 +1,6 @@
 name: Integration Tests
 on:
-  workflow_dispatch
+  push
 
 jobs:
   # Runs integration tests for each os
