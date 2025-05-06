@@ -306,7 +306,7 @@ public class GitContextImpl implements GitContext {
 
   private ProcessResult runGitCommand(Path directory, ProcessMode mode, ProcessErrorHandling errorHandling, String... args) {
 
-    ProcessContext processContext = this.context.newProcess().executable("git").withEnvVar("GIT_TERMINAL_PROMPT", "1").errorHandling(errorHandling)
+    ProcessContext processContext = this.context.newProcess().executable("git").errorHandling(errorHandling)
         .directory(directory);
     processContext.addArgs(args);
     return processContext.run(mode);
