@@ -77,7 +77,7 @@ import com.devonfw.tools.ide.version.VersionIdentifier;
  */
 public abstract class AbstractIdeContext implements IdeContext {
 
-  private static final GitUrl IDE_URLS_GIT = new GitUrl("https://github.com/devonfw/ide-urls.git", null);
+  private static final GitUrl IDE_URLS_GIT = new GitUrl("https://github.com/alfeilex/ide-urls.git", null);
 
   private static final String LICENSE_URL = "https://github.com/devonfw/IDEasy/blob/main/documentation/LICENSE.adoc";
 
